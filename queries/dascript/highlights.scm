@@ -6,11 +6,11 @@
 (type) @type
 
 ; Literals
-(integer) @number
-(float) @float
-(double) @float
-(string) @string
-(boolean) @boolean
+(integer_literal) @number
+(float_literal) @float
+(double_literal) @float
+(string_literal) @string
+(boolean_literal) @boolean
 
 ; Functions
 (function_definition
