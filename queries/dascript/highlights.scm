@@ -12,28 +12,17 @@
 (boolean_literal) @boolean
 
 ; Functions
-(function_declaration
-  "def" @keyword.function
-  name: (identifier) @function)
-(function_call
-  function: (identifier) @function.call)
+(function_declaration "def" @keyword.function (identifier) @function)
+(function_call (identifier) @function.call)
 
 ; Structs and Enums
-(struct_declaration
-  "struct" @keyword.storage.type
-  name: (identifier) @type)
-(struct_declaration
-  "class" @keyword.storage.type
-  name: (identifier) @type)
+(struct_declaration "struct" @keyword.storage.type (identifier) @type)
+(struct_declaration "class" @keyword.storage.type (identifier) @type)
 (enum_declaration "enum" @keyword.storage.type)
 
 ; Variable declarations
-(variable_declaration
-  "let" @keyword
-  name: (identifier) @variable)
-(parameter
-  "var" @keyword
-  name: (identifier) @parameter)
+(variable_declaration "let" @keyword (identifier) @variable)
+(parameter "var" @keyword (identifier) @parameter)
 
 ; Control flow
 "return" @keyword.return
