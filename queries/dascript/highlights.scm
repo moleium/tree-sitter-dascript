@@ -43,8 +43,7 @@
 "sealed" @keyword.storage.modifier
 
 ; Parameters
-(parameter
-  name: (identifier) @parameter)
+(parameter (identifier) @parameter)
 
 ; Operators
 "+" @operator
@@ -77,6 +76,5 @@
 ((identifier) @type.builtin
  (#match? @type.builtin "^(bool|void|string|auto|int|int2|int3|int4|uint|bitfield|uint2|uint3|uint4|float|float2|float3|float4|range|urange|block|int64|uint64|double|function|lambda|int8|uint8|int16|uint16|tuple|variant|generator|yield)$"))
 
-(annotation
-  name: (identifier) @attribute)
+(annotation (identifier) @attribute)
 "typedef" @keyword
