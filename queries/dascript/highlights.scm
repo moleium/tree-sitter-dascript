@@ -1,80 +1,72 @@
-; Basic elements
-(comment) @comment
+; Identifiers
 (identifier) @variable
 
-; Types
-(type) @type
+; Keywords
+[
+  "struct" "class" "let" "def" "while" "if" "static_if" "else"
+  "for" "recover" "true" "false" "new" "typeinfo" "type" "in" "is"
+  "as" "elif" "static_elif" "array" "return" "null" "break" "try"
+  "options" "table" "expect" "const" "require" "operator" "enum"
+  "finally" "delete" "deref" "typedef" "with" "cast" "override"
+  "abstract" "upcast" "iterator" "var" "addr" "continue" "where"
+  "pass" "reinterpret" "module" "public" "label" "goto" "implicit"
+  "explicit" "shared" "private" "smart_ptr" "unsafe" "aka" "assume"
+  "sealed" "inscope" "static"
+] @keyword
 
 ; Literals
-(integer_literal) @number
-(float_literal) @float
-(string_literal) @string
-(boolean_literal) @boolean
+(true) @constant.builtin
+(false) @constant.builtin
+(integer) @number
+(float) @number.float
+(string) @string
 
-; Functions
-(function_declaration "def" @keyword.function (identifier) @function)
-(function_call (identifier) @function.call)
+; Types
+(builtin_type) @type.builtin
+(qualified_type) @type.qualified
 
-; Structs and Enums
-(struct_declaration "struct" @keyword.storage.type (identifier) @type)
-(struct_declaration "class" @keyword.storage.type (identifier) @type)
-(enum_declaration "enum" @keyword.storage.type)
+; Struct Declarations
+(struct_declaration) @type.struct
+(struct_inheritance) @type.inheritance
 
-; Variable declarations
-(variable_declaration "let" @keyword (identifier) @variable)
-(parameter "var" @keyword (identifier) @parameter)
+; Function Definitions
+(function_definition
+  identifier: (identifier) @function.definition
+) 
 
-; Control flow
-"return" @keyword.return
-"if" @keyword.control.conditional
-"else" @keyword.control.conditional
-"for" @keyword.control.repeat
-"while" @keyword.control.repeat
-"in" @keyword.control.repeat
+; Variable Declarations
+(variable_declaration
+  identifier: (identifier) @variable.declaration
+)
 
-; Modifiers
-"const" @keyword.storage.modifier
-"abstract" @keyword.storage.modifier
-"override" @keyword.storage.modifier
-"private" @keyword.storage.modifier
-"public" @keyword.storage.modifier
-"shared" @keyword.storage.modifier
-"static" @keyword.storage.modifier
-"sealed" @keyword.storage.modifier
+; Function Calls
+(call_expression
+  function: (identifier) @function.call
+)
 
-; Parameters
-(parameter (identifier) @parameter)
+; Binary Operators
+[
+  "+" "-" "*" "/" "%" "&&" "||" "==" "!=" "<" "<=" ">" ">=" "<<" ">>"
+] @operator
 
-; Operators
-"+" @operator
-"-" @operator
-"*" @operator
-"/" @operator
-"%" @operator
-"==" @operator
-"!=" @operator
-"<" @operator
-">" @operator
-"<=" @operator
-">=" @operator
-"&&" @operator
-"||" @operator
-"!" @operator
-"." @operator
-"=" @operator
-":" @operator
-"[" @operator
-"]" @operator
-"(" @operator
-")"
-"<" @operator
-">"
-"," @operator
-";" @operator
+; Unary Operators
+["+" "-" "!" "~"] @operator
 
+; Statements
+(expression_statement) @statement
+(return_statement) @statement
+(if_statement) @statement.conditional
+(while_statement) @statement.loop
+(for_statement) @statement.loop
+(break_statement) @statement.control
+(continue_statement) @statement.control
 
-((identifier) @type.builtin
- (#match? @type.builtin "^(bool|void|string|auto|int|int2|int3|int4|uint|bitfield|uint2|uint3|uint4|float|float2|float3|float4|range|urange|block|int64|uint64|double|function|lambda|int8|uint8|int16|uint16|tuple|variant|generator|yield)$"))
+; Block
+(block) @block
 
-(annotation (identifier) @attribute)
-"typedef" @keyword
+; Parentheses
+("(" ")") @punctuation.bracket
+"{" "}" @punctuation.bracket
+
+; Comments
+(comment) @comment
