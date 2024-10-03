@@ -8,7 +8,6 @@
 ; Literals
 (integer_literal) @number
 (float_literal) @float
-(double_literal) @float
 (string_literal) @string
 (boolean_literal) @boolean
 
