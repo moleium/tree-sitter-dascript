@@ -49,15 +49,18 @@ module.exports = grammar({
 
         parameter_list: $ => seq(
             '(',
-            commaSep(seq(
-                optional('var'),
-                $.identifier,
-                ':',
-                $.type,
-                optional(seq('=', $.$expression)),
-            )),
+            optional(seq($.parameter, repeat(seq(',', $.parameter)))),
             ')',
         ),
+
+        parameter: $ => seq(
+            optional('var'),
+            $.identifier,
+            ':',
+            $.type,
+            optional(seq('=', $.$expression)),
+        ),
+
 
         return_type: $ => seq(':', $.type),
 
@@ -95,13 +98,13 @@ module.exports = grammar({
         block: $ => seq('{', repeat($.$statement), '}'),
 
         $statement: $ => choice(
-          $.variable_declaration, // These already have ;
-          $.return_statement,      // This already has ;
-          $.if_statement,
-          $.for_statement,
-          $.while_statement,
-          $.block,                 // Blocks don't need ;
-          seq($.$expression, ';'), // <--- Require ; for expressions
+            $.variable_declaration, // These already have ;
+            $.return_statement,      // This already has ;
+            $.if_statement,
+            $.for_statement,
+            $.while_statement,
+            $.block,                 // Blocks don't need ;
+            seq($.$expression, ';'), // <--- Require ; for expressions
         ),
 
         return_statement: $ => seq('return', optional($.$expression), ';'),
@@ -154,7 +157,7 @@ module.exports = grammar({
             ')',
         ),
 
-        binary_expression: $ => prec.left(seq($.$expression, choice('+', '-', '*', '/', '%', '==', '!=', '<', '>', '<=', '>=' , '&&', '||'), $.$expression)),
+        binary_expression: $ => prec.left(seq($.$expression, choice('+', '-', '*', '/', '%', '==', '!=', '<', '>', '<=', '>=', '&&', '||'), $.$expression)),
 
         unary_expression: $ => prec(1, seq(choice('+', '-', '!'), $.$expression)),
 
