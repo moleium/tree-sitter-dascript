@@ -6,7 +6,9 @@
 (type) @type
 
 ; Literals
-(number) @number
+(integer) @number
+(float) @float
+(double) @float
 (string) @string
 (boolean) @boolean
 
