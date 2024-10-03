@@ -8,6 +8,7 @@ module.exports = grammar({
     extras: $ => [
         /\s/,
         $.comment,
+        $.block_comment,
     ],
 
     rules: {
@@ -20,6 +21,7 @@ module.exports = grammar({
             $.enum_declaration,
             $.variable_declaration,
             $.type_alias,
+            $.annotation,
         ),
 
         comment: $ => seq('//', /.*/),
