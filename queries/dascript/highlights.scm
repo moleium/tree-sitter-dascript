@@ -1,5 +1,4 @@
 (comment) @comment
-(block_comment) @comment
 
 (identifier) @variable
 
