@@ -30,19 +30,13 @@
 (struct_inheritance) @type.inheritance
 
 ; Function Definitions
-(function_definition
-  identifier: (identifier) @function.definition
-) 
+(function_definition) @function.definition
 
 ; Variable Declarations
-(variable_declaration
-  identifier: (identifier) @variable.declaration
-)
+(variable_declaration) @variable.declaration
 
 ; Function Calls
-(call_expression
-  function: (identifier) @function.call
-)
+(call_expression) @function.call
 
 ; Binary Operators
 [

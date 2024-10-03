@@ -141,13 +141,13 @@ module.exports = grammar({
         function_definition: $ => seq(
             'def',
             optional(seq(choice('abstract', 'override'), choice('private', 'public'), optional('static'))),
-            $.identifier,
+            $._identifier,
             '(',
             optional($.parameter_list),
             ')',
             optional($.block),
-            prec.right($.block), 
-        ),
+            prec.right($.block),
+          ),
 
         parameter_list: $ => commaSep1($.parameter),
 
@@ -239,6 +239,8 @@ module.exports = grammar({
         continue_statement: $ => 'continue',
 
         block: $ => seq('{', repeat($._statement), '}'),
+
+        _identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
     }
 });
 
