@@ -1,108 +1,77 @@
+; Basic elements
 (comment) @comment
-
 (identifier) @variable
 
+; Types
 (type) @type
-("bool" @type.builtin)
-("void" @type.builtin)
-("string" @type.builtin)
-("auto" @type.builtin)
-("int" @type.builtin)
-("int2" @type.builtin)
-("int3" @type.builtin)
-("int4" @type.builtin)
-("uint" @type.builtin)
-("bitfield" @type.builtin)
-("uint2" @type.builtin)
-("uint3" @type.builtin)
-("uint4" @type.builtin)
-("float" @type.builtin)
-("float2" @type.builtin)
-("float3" @type.builtin)
-("float4" @type.builtin)
-("range" @type.builtin)
-("urange" @type.builtin)
-("block" @type.builtin)
-("int64" @type.builtin)
-("uint64" @type.builtin)
-("double" @type.builtin)
-("function" @type.builtin)
-("lambda" @type.builtin)
-("int8" @type.builtin)
-("uint8" @type.builtin)
-("int16" @type.builtin)
-("uint16" @type.builtin)
-("tuple" @type.builtin)
-("variant" @type.builtin)
-("generator" @type.builtin)
-("yield" @type.builtin)
 
+; Literals
+(number) @number
+(string) @string
+(boolean) @boolean
 
-(integer_literal) @number
-(float_literal) @float
-(string_literal) @string
-(boolean_literal) @boolean
-
-(function_declaration
+; Functions
+(function_definition
   "def" @keyword.function
-  (identifier) @function)
+  name: (identifier) @function)
 (function_call
-  (identifier) @function.call)
+  function: (identifier) @function.call)
 
-(struct_declaration
+; Structs and Enums
+(struct_definition
   "struct" @keyword.storage.type
+  name: (identifier) @type)
+(struct_definition
   "class" @keyword.storage.type
-  (identifier) @type)
-(enum_declaration
-  "enum" @keyword.storage.type
-  (identifier) @type)
+  name: (identifier) @type)
 
+; Variable declarations
 (variable_declaration
-  "let" @keyword)
+  "let" @keyword
+  name: (identifier) @variable)
+(variable_declaration
+  "var" @keyword
+  name: (identifier) @variable)
 
-(type_alias
-  "typedef" @keyword)
+; Control flow
+"return" @keyword.return
+"if" @keyword.control.conditional
+"else" @keyword.control.conditional
+"for" @keyword.control.repeat
+"while" @keyword.control.repeat
 
-(return_statement
-  "return" @keyword.return)
+; Modifiers
+"const" @keyword.storage.modifier
+"abstract" @keyword.storage.modifier
+"override" @keyword.storage.modifier
+"private" @keyword.storage.modifier
+"public" @keyword.storage.modifier
+"shared" @keyword.storage.modifier
+"static" @keyword.storage.modifier
 
-("if" @keyword.control.conditional)
-("else" @keyword.control.conditional)
-("for" @keyword.control.repeat)
-("while" @keyword.control.repeat)
+; Parameters
+(parameter
+  name: (identifier) @parameter)
 
-("const" @keyword.storage.modifier)
-("abstract" @keyword.storage.modifier)
-("override" @keyword.storage.modifier)
-("private" @keyword.storage.modifier)
-("public" @keyword.storage.modifier)
-("shared" @keyword.storage.modifier)
-("static" @keyword.storage.modifier)
+; Operators
+"+" @operator
+"-" @operator
+"*" @operator
+"/" @operator
+"%" @operator
+"==" @operator
+"!=" @operator
+"<" @operator
+">" @operator
+"<=" @operator
+">=" @operator
+"&&" @operator
+"||" @operator
+"!" @operator
+"." @operator
 
-(parameter_list
-  (identifier) @parameter)
-
-(binary_expression
-  "+" @operator
-  "-" @operator
-  "*" @operator
-  "/" @operator
-  "%" @operator
-  "==" @operator
-  "!=" @operator
-  "<" @operator
-  ">" @operator
-  "<=" @operator
-  ">=" @operator
-  "&&" @operator
-  "||" @operator)
-
-(unary_expression
-  "+" @operator
-  "-" @operator
-  "!" @operator)
-
-("." @operator)
+((identifier) @type.builtin
+ (#match? @type.builtin "^(bool|void|string|auto|int|int2|int3|int4|uint|bitfield|uint2|uint3|uint4|float|float2|float3|float4|range|urange|block|int64|uint64|double|function|lambda|int8|uint8|int16|uint16|tuple|variant|generator|yield)$"))
 
 (annotation
-  (identifier) @attribute)
+  name: (identifier) @attribute)
