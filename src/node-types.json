@@ -8,6 +8,10 @@
       "required": true,
       "types": [
         {
+          "type": "annotation",
+          "named": true
+        },
+        {
           "type": "enum_declaration",
           "named": true
         },
@@ -121,6 +125,25 @@
     }
   },
   {
+    "type": "annotation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "$expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "array_access",
     "named": true,
     "fields": {},
@@ -179,6 +202,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "block_comment",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "boolean_literal",
